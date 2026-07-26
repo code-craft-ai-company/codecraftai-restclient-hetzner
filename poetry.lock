@@ -132,7 +132,7 @@ codecraftai-errors = {git = "https://github.com/automationmojo/codecraftai-error
 type = "git"
 url = "https://github.com/automationmojo/codecraftai-credentials.git"
 reference = "main"
-resolved_reference = "0c52375f9670cf6fbae22eb6ebf9a65182eeb0b9"
+resolved_reference = "7aa969658cc46d9daa000b5fa6faebabceabb0ec"
 
 [[package]]
 name = "codecraftai-errors"
@@ -190,7 +190,7 @@ requests = "^2.32.5"
 type = "git"
 url = "https://github.com/automationmojo/codecraftai-restclient-base.git"
 reference = "main"
-resolved_reference = "7519ed4809b8daa1da0fc53efe7014c4d9016fb2"
+resolved_reference = "a5c8fc1d5a9d2cde5dc6d6d85985afab010bdd3c"
 
 [[package]]
 name = "colorama"
