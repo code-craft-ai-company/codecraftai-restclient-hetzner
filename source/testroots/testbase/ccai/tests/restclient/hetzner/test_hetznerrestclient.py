@@ -15,7 +15,7 @@ __copyright__ = "Copyright 2026, Code Craft AI LLC"
 __credits__ = []
 
 
-import pytest
+from ccai import testbase
 
 from ccai.restclient.hetzner.hetznerapierror import HetznerApiRequestError
 from ccai.restclient.hetzner.hetznerresource import (
@@ -82,7 +82,7 @@ def test_object_refuses_private_attribute_lookups():
 
     # Resolving dunder lookups as API fields would make copy/pickle/inspect
     # machinery see phantom attributes.
-    with pytest.raises(AttributeError):
+    with testbase.raises(AttributeError):
         getattr(obj, "_ipython_canary")
     return
 
@@ -158,7 +158,7 @@ def test_error_reason_comes_from_the_hetzner_error_envelope():
                       payload={"error": {"code": "not_found",
                                          "message": "server not found"}}))
 
-    with pytest.raises(HetznerApiRequestError) as caught:
+    with testbase.raises(HetznerApiRequestError) as caught:
         client.servers.get_by_name(name="missing")
 
     assert caught.value.status == 404
@@ -172,7 +172,7 @@ def test_error_falls_back_to_the_http_reason():
                   response=FakeResponse(status_code=500,
                                         reason="Server Error", text="oops"))
 
-    with pytest.raises(HetznerApiRequestError) as caught:
+    with testbase.raises(HetznerApiRequestError) as caught:
         client.servers.get_by_name(name="worker-01")
 
     assert caught.value.status == 500
@@ -259,7 +259,7 @@ def test_get_by_id_unwraps_the_singular_key():
 # deletion
 # ----------------------------------------------------------------------
 
-@pytest.mark.parametrize("group_name,singular,path", [
+@testbase.parametrize("group_name,singular,path", [
     ("servers", "server", "/servers/3"),
     ("volumes", "volume", "/volumes/3"),
     ("networks", "network", "/networks/3"),
@@ -294,7 +294,7 @@ def test_delete_without_a_target_raises():
 
     # A silent no-op here would leave infrastructure running while
     # reporting success.
-    with pytest.raises(TypeError):
+    with testbase.raises(TypeError):
         client.servers.delete()
 
     assert len(session.calls) == 0
@@ -427,7 +427,7 @@ def test_volume_attach_accepts_server_id_or_server():
 def test_volume_attach_without_a_target_raises():
     client, session = _build_client()
 
-    with pytest.raises(TypeError):
+    with testbase.raises(TypeError):
         client.volumes.attach(volume=HetznerObject({"id": 71}))
 
     assert len(session.calls) == 0
