@@ -23,7 +23,7 @@ from ccai.restclient.hetzner.hetznerresource import (
 )
 from ccai.restclient.hetzner.hetznerrestclient import HetznerRestClient
 
-from ccai.tests.restclient.hetzner.fakesession import (
+from .fakesession import (
     FakeResponse, FakeSession
 )
 
