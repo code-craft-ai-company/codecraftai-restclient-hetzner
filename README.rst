@@ -1,6 +1,6 @@
-============================
+==============================
 codecraftai-restclient-hetzner
-============================
+==============================
 
 A pure-Python REST client for the `Hetzner Cloud API v1
 <https://docs.hetzner.cloud/>`_.
@@ -42,7 +42,7 @@ Design notes
 ============
 
 **Objects are attribute addressable, not active record.** Responses are
-:class:`HetznerObject` — a ``dict`` that also answers attribute access, with
+``HetznerObject`` — a ``dict`` that also answers attribute access, with
 absent fields reading as ``None`` so ``getattr(obj, "field", None)`` guards
 written against the SDK keep behaving the same way.  Nested objects are
 wrapped too, so ``server.server_type.name`` resolves.  Mutations are NOT
@@ -59,7 +59,7 @@ from earlier creates and passes them straight through.
 ``meta.pagination``.  A silently truncated first page would under-report owned
 resources, which on a teardown path means leaked infrastructure.
 
-**Errors are thin.** :class:`HetznerApiRequestError` carries ``status``,
+**Errors are thin.** ``HetznerApiRequestError`` carries ``status``,
 ``reason`` and ``body``; the reason is lifted out of Hetzner's
 ``{"error": {"code", "message"}}`` envelope.  Translating status codes into a
 typed hierarchy is the consumer's policy, not the transport's.
